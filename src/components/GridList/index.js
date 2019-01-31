@@ -44,7 +44,7 @@ function SingleLineGridList(props) {
     <div className={classes.root}>
       <GridList cellHeight={200} spacing={1} className={classes.gridList}>
         {data.map(nasa => (
-          <GridListTile key={nasa.data[0].description + Math.random()} rows={3}>
+          <GridListTile key={nasa.data[0].description + Math.random()} rows={1}>
             <img
               className={classes.images}
               src={nasa.links[0].href}
