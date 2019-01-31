@@ -42,7 +42,7 @@ function SingleLineGridList(props) {
   const { classes, data } = props;
   return (
     <div className={classes.root}>
-      <GridList cellHeight={200} spacing={1} className={classes.gridList}>
+      <GridList cellHeight={400} spacing={1} className={classes.gridList}>
         {data.map(nasa => (
           <GridListTile key={nasa.data[0].description + Math.random()} rows={1}>
             <img
