@@ -7,6 +7,15 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { connect } from "react-redux";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import blue from "@material-ui/core/colors/blue";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    type: "dark"
+  }
+});
 
 const styles = theme => ({
   root: {
@@ -18,6 +27,7 @@ const styles = theme => ({
     margin: "0 auto"
   },
   gridList: {
+    maxWidth: "1100px",
     width: "100%",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)"
@@ -29,42 +39,37 @@ const styles = theme => ({
   },
   icon: {
     color: "white"
-  },
-  images: {
-    maxWidth: "100%",
-    maxHeight: "100%",
-    height: "100%",
-    width: "100%"
   }
 });
 
 function SingleLineGridList(props) {
   const { classes, data } = props;
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={600} spacing={1} className={classes.gridList}>
-        {data.map(nasa => (
-          <GridListTile key={nasa.data[0].description + Math.random()} rows={1}>
-            <img
-              className={classes.images}
-              src={nasa.links[0].href}
-              alt={nasa.data[0].description}
-            />
-            <GridListTileBar
-              title={nasa.data[0].description}
-              titlePosition="top"
-              actionIcon={
-                <IconButton className={classes.icon}>
-                  <StarBorderIcon />
-                </IconButton>
-              }
-              actionPosition="left"
-              className={classes.titleBar}
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <GridList cellHeight={400} spacing={1} className={classes.gridList}>
+          {data.map(nasa => (
+            <GridListTile
+              key={nasa.data[0].description + Math.random()}
+              rows={1}
+            >
+              <img src={nasa.links[0].href} alt={nasa.data[0].description} />
+              <GridListTileBar
+                title={nasa.data[0].description}
+                titlePosition="top"
+                actionIcon={
+                  <IconButton className={classes.icon}>
+                    <StarBorderIcon />
+                  </IconButton>
+                }
+                actionPosition="left"
+                className={classes.titleBar}
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    </MuiThemeProvider>
   );
 }
 
